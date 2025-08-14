@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { getItems } from '@/firebase/GetItemsAction'
+import type { Item } from '@/firebase/types'
 import { onMounted, ref } from 'vue'
 
-const items = ref<any[]>([])
+const items = ref<Item[]>([])
 
 async function populateItemList() {
   items.value = await getItems()
