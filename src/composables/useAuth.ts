@@ -26,6 +26,7 @@ export function useAuth() {
     try {
       await signOut(auth)
       user.value = null
+      router.push('/login')
     } catch (error) {
       console.error('Sign-out error:', error)
       throw error
