@@ -1,29 +1,27 @@
-// composables/useAuth.ts
 import { ref, onMounted } from 'vue'
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth'
+import { signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth'
+import { auth } from '@/firebase'
 import type { User } from 'firebase/auth'
+import { useRouter } from 'vue-router'
 
-// Create a single auth instance (make sure Firebase is initialized in your project)
-const auth = getAuth()
 const provider = new GoogleAuthProvider()
 
-// Global reactive state (so it's shared across components)
 const user = ref<User | null>(auth.currentUser)
 const loading = ref<boolean>(true)
 
 export function useAuth() {
-  // sign in with Google
+  const router = useRouter()
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider)
       user.value = result.user
+      router.push('/')
     } catch (error) {
       console.error('Google sign-in error:', error)
       throw error
     }
   }
 
-  // sign out
   const signOutUser = async () => {
     try {
       await signOut(auth)
@@ -34,7 +32,6 @@ export function useAuth() {
     }
   }
 
-  // track auth state changes
   onMounted(() => {
     const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
       user.value = firebaseUser
