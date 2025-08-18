@@ -1,5 +1,5 @@
 import { collection, getDocs } from 'firebase/firestore'
-import { database } from '.'
+import { database } from '../main'
 import type { Item } from './types'
 
 export async function getItems(): Promise<Item[]> {
