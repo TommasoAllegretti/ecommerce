@@ -1,61 +1,70 @@
-# .
+## 🚀 Project Overview
 
-This template should help get you started developing with Vue 3 in Vite.
+This project is a **Vue 3** application built with **TypeScript**, using **Firebase Authentication** and **Firestore** as backend services. Styling is powered by **Tailwind CSS**. State management is handled with **Pinia**, and routing is managed by **Vue Router**.
 
-## Recommended IDE Setup
+The project includes:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+**Composable utilities** (e.g., useAuth) for handling authentication and screen detection.
 
-## Type Support for `.vue` Imports in TS
+**Reusable UI components** such as ItemCard, TagBadge, BaseModal, and SignOutButton.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+**Protected routes** using navigation guards.
 
-## Customize configuration
+**Unit tests** with **Vitest** + **Vue Test Utils**.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## 🛠️ Technologies Used
 
-## Project Setup
+**Vue 3** + **TypeScript** – Frontend framework
 
-```sh
+**Pinia** – State management
+
+**Vue Router** – Client-side routing with guards
+
+**Tailwind CSS** – Utility-first styling
+
+**Firebase (Auth + Firestore)** – Authentication and database
+
+**Vitest** + **Vue Test Utils** – Unit testing
+
+## ⚙️ Project Setup
+
+1. Install dependencies
+
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+2. Environment variables
 
-```sh
+Create a .env file in the project root with your Firebase config:
+
+```
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_PROJECT_ID=
+VITE_FIREBASE_MESSAGE_SENDER_ID=
+VITE_FIREBASE_APP_ID=
+```
+
+3. Run the development server
+
+```
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+App will be available at http://localhost:5173/ (or the port shown in your terminal).
 
-```sh
-npm run build
+## ✅ Running Tests
+
+**Unit tests (Vitest)**
+
 ```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
 npm run test:unit
 ```
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+Runs the unit tests located in src/components/**tests**/ (e.g. Modal.spec.ts).
 
-```sh
-npm run test:e2e:dev
+## 📦 Build for Production
+
 ```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
 npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
