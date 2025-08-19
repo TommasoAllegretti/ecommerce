@@ -8,6 +8,7 @@ import BaseModal from '@/components/BaseModal.vue'
 import ItemDetail from '@/components/ItemDetail.vue'
 
 const items = ref<Item[]>([])
+const isLoading = ref(true)
 
 const showModal = ref(false)
 
@@ -19,7 +20,11 @@ function onItemClick(item: Item) {
 }
 
 async function populateItemList() {
-  items.value = await getItems()
+  try {
+    items.value = await getItems()
+  } finally {
+    isLoading.value = false
+  }
 }
 
 onMounted(() => {
@@ -34,6 +39,28 @@ onMounted(() => {
       <sign-out-button></sign-out-button>
     </div>
     <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Skeleton -->
+      <template v-if="isLoading">
+        <div
+          v-for="n in 6"
+          :key="n"
+          class="md:shadow-black/20 md:dark:shadow-white/20 bg-blue-100 dark:bg-gray-900 rounded-2xl overflow-hidden"
+        >
+          <div class="w-full aspect-[3/3] bg-gray-300 dark:bg-gray-700 animate-pulse"></div>
+
+          <div class="p-4 space-y-2">
+            <div class="h-6 w-3/4 rounded bg-gray-300 dark:bg-gray-700 animate-pulse"></div>
+            <div class="h-4 w-1/2 rounded bg-gray-300 dark:bg-gray-700 animate-pulse"></div>
+            <div class="flex gap-2 mt-2">
+              <div
+                v-for="n in 2"
+                :key="n"
+                class="h-6 w-12 rounded-full bg-gray-300 dark:bg-gray-700 animate-pulse"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </template>
       <ItemCard
         v-for="item in items"
         :key="item.id"
